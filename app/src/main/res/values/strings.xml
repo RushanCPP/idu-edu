@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">SolidCourse</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="course_name">Название курса</string>
+    <string name="course_author">Автор курса</string>
+    <string name="create_course">Создать курс</string>
+    <string name="creating_course_title">Создание курса</string>
+    <string name="add_paragraph">Добавить главу</string>
+    <string name="edit_course">Изменить курс</string>
+    <string name="save_course">Сохранить курс</string>
+    <string name="editing_course_title">Редактирование курса</string>
+    <string name="save_changes">Сохранить изменения</string>
+    <string name="go">Перейти</string>
+    <string name="edit">Изменить</string>
+    <string name="paragraph_name">Название главы</string>
+    <string name="editing_paragraph_title">Редактирование главы</string>
+    <string name="create_paragraph">Создать главу</string>
+    <string name="creating_paragraph_title">Создание главы</string>
+    <string name="add_lesson">Добавить урок</string>
+    <string name="edit_paragraph">Изменить главу</string>
+    <string name="lesson_name">Название урока</string>
+    <string name="creating_lesson_title">Создание урока</string>
+    <string name="create_lesson">Создать урок</string>
+    <string name="create_task">Добавить задание</string>
+    <string name="editing_lesson_title">Редактирование урока</string>
+    <string name="edit_lesson">Изменить урок</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Отменить</string>
+</resources>

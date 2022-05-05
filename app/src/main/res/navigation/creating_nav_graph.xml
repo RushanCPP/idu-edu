@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/creating_nav_graph"
+    app:startDestination="@id/courseCreatingFragment">
+
+    <fragment
+        android:id="@+id/courseCreatingFragment"
+        android:name="com.example.solidcourse.creating.course.CourseCreatingFragment"
+        android:label="fragment_course_creating"
+        tools:layout="@layout/fragment_course_creating" >
+        <action
+            android:id="@+id/action_courseCreatingFragment_to_courseFragment"
+            app:destination="@id/courseFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/courseFragment"
+        android:name="com.example.solidcourse.creating.course.CourseFragment"
+        android:label="fragment_course"
+        tools:layout="@layout/fragment_course" >
+        <action
+            android:id="@+id/action_courseFragment_to_courseEditingFragment"
+            app:destination="@id/courseEditingFragment" />
+        <action
+            android:id="@+id/action_courseFragment_to_paragraphCreatingFragment"
+            app:destination="@id/paragraphCreatingFragment" />
+        <action
+            android:id="@+id/action_courseFragment_to_paragraphEditingFragment"
+            app:destination="@id/paragraphEditingFragment" />
+        <action
+            android:id="@+id/action_courseFragment_to_paragraphFragment"
+            app:destination="@id/paragraphFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/courseEditingFragment"
+        android:name="com.example.solidcourse.creating.course.CourseEditingFragment"
+        android:label="fragment_course_editing"
+        tools:layout="@layout/fragment_course_editing" />
+    <fragment
+        android:id="@+id/paragraphCreatingFragment"
+        android:name="com.example.solidcourse.creating.paragraph.ParagraphCreatingFragment"
+        android:label="fragment_paragraph_creating"
+        tools:layout="@layout/fragment_paragraph_creating" />
+    <fragment
+        android:id="@+id/paragraphEditingFragment"
+        android:name="com.example.solidcourse.creating.paragraph.ParagraphEditingFragment"
+        android:label="fragment_paragraph_editing"
+        tools:layout="@layout/fragment_paragraph_editing" />
+    <fragment
+        android:id="@+id/paragraphFragment"
+        android:name="com.example.solidcourse.creating.paragraph.ParagraphFragment"
+        android:label="fragment_paragraph"
+        tools:layout="@layout/fragment_paragraph" >
+        <action
+            android:id="@+id/action_paragraphFragment_to_paragraphEditingFragment"
+            app:destination="@id/paragraphEditingFragment" />
+        <action
+            android:id="@+id/action_paragraphFragment_to_lessonCreatingFragment"
+            app:destination="@id/lessonCreatingFragment" />
+        <action
+            android:id="@+id/action_paragraphFragment_to_lessonFragment"
+            app:destination="@id/lessonFragment" />
+        <action
+            android:id="@+id/action_paragraphFragment_to_lessonEditingFragment"
+            app:destination="@id/lessonEditingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/lessonCreatingFragment"
+        android:name="com.example.solidcourse.creating.lesson.LessonCreatingFragment"
+        android:label="fragment_lesson_creating"
+        tools:layout="@layout/fragment_lesson_creating" />
+    <fragment
+        android:id="@+id/lessonFragment"
+        android:name="com.example.solidcourse.creating.lesson.LessonFragment"
+        android:label="fragment_lesson"
+        tools:layout="@layout/fragment_lesson" >
+        <action
+            android:id="@+id/action_lessonFragment_to_lessonEditingFragment"
+            app:destination="@id/lessonEditingFragment" />
+        <action
+            android:id="@+id/action_lessonFragment_to_taskFragment"
+            app:destination="@id/taskFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/lessonEditingFragment"
+        android:name="com.example.solidcourse.creating.lesson.LessonEditingFragment"
+        android:label="fragment_lesson_editing"
+        tools:layout="@layout/fragment_lesson_editing" />
+    <fragment
+        android:id="@+id/taskFragment"
+        android:name="com.example.solidcourse.creating.task.TaskFragment"
+        android:label="fragment_task"
+        tools:layout="@layout/fragment_task" />
+</navigation>
