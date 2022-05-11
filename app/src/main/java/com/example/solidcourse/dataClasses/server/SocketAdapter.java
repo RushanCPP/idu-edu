@@ -1,51 +1,45 @@
 package com.example.solidcourse.dataClasses.server;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.Closeable;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 public class SocketAdapter implements Closeable {
     private final Socket socket;
-    private final BufferedWriter writer;
-    private final BufferedReader reader;
+    final ObjectOutputStream writer;
+    final ObjectInputStream reader;
 
     public SocketAdapter(Socket socket) {
         this.socket = socket;
-        this.reader = getReader();
         this.writer = getWriter();
+        this.reader = getReader();
     }
 
-    private BufferedReader getReader() {
+    private ObjectInputStream getReader() {
         try {
-            return new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            return new ObjectInputStream(socket.getInputStream());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private BufferedWriter getWriter() {
+    private ObjectOutputStream getWriter() {
         try {
-            return new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+            return new ObjectOutputStream(socket.getOutputStream());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void writeLine(String line) throws IOException {
-        writer.write(line);
-        writer.newLine();
+    public void write(Object message) throws IOException {
+        writer.writeObject(message);
+        writer.flush();
     }
 
-    public void write(String message) throws IOException {
-        writer.write(message);
-    }
-
-    public String readLine() throws IOException {
-        return reader.readLine();
+    public Object read() throws IOException, ClassNotFoundException {
+        return reader.readObject();
     }
 
     @Override

@@ -2,7 +2,11 @@ package com.example.solidcourse.dataClasses.course;
 
 import androidx.annotation.NonNull;
 
-public abstract class AbstractTask implements Task {
+import java.io.Serializable;
+
+public abstract class AbstractTask implements Task, Serializable {
+    private static final long serialVersionUID = 1L;
+
     protected int state = NOT_BEGIN;
     protected String text;
     protected int score = 0;

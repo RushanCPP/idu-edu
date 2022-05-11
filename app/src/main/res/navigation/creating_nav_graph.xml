@@ -83,6 +83,18 @@
         <action
             android:id="@+id/action_lessonFragment_to_taskFragment"
             app:destination="@id/taskFragment" />
+        <action
+            android:id="@+id/action_lessonFragment_to_countTaskCreatingFragment"
+            app:destination="@id/countTaskCreatingFragment" />
+        <action
+            android:id="@+id/action_lessonFragment_to_studyTaskCreatingFragment"
+            app:destination="@id/studyTaskCreatingFragment" />
+        <action
+            android:id="@+id/action_lessonFragment_to_countTaskEditingFragment"
+            app:destination="@id/countTaskEditingFragment" />
+        <action
+            android:id="@+id/action_lessonFragment_to_studyTaskEditingFragment"
+            app:destination="@id/studyTaskEditingFragment" />
     </fragment>
     <fragment
         android:id="@+id/lessonEditingFragment"
@@ -93,5 +105,32 @@
         android:id="@+id/taskFragment"
         android:name="com.example.solidcourse.creating.task.TaskFragment"
         android:label="fragment_task"
-        tools:layout="@layout/fragment_task" />
+        tools:layout="@layout/fragment_task" >
+        <action
+            android:id="@+id/action_taskFragment_to_countTaskEditingFragment"
+            app:destination="@id/countTaskEditingFragment" />
+        <action
+            android:id="@+id/action_taskFragment_to_studyTaskEditingFragment"
+            app:destination="@id/studyTaskEditingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/countTaskCreatingFragment"
+        android:name="com.example.solidcourse.creating.task.creating.CountTaskCreatingFragment"
+        android:label="fragment_count_task_creating"
+        tools:layout="@layout/fragment_count_task_creating" />
+    <fragment
+        android:id="@+id/studyTaskCreatingFragment"
+        android:name="com.example.solidcourse.creating.task.creating.StudyTaskCreatingFragment"
+        android:label="fragment_study_task_creating"
+        tools:layout="@layout/fragment_study_task_creating" />
+    <fragment
+        android:id="@+id/countTaskEditingFragment"
+        android:name="com.example.solidcourse.creating.task.CountTaskEditingFragment"
+        android:label="fragment_count_task_editing"
+        tools:layout="@layout/fragment_count_task_editing" />
+    <fragment
+        android:id="@+id/studyTaskEditingFragment"
+        android:name="com.example.solidcourse.creating.task.StudyTaskEditingFragment"
+        android:label="fragment_study_task_editing"
+        tools:layout="@layout/fragment_study_task_editing" />
 </navigation>

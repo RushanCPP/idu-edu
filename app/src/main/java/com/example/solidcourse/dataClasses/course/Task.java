@@ -1,6 +1,10 @@
 package com.example.solidcourse.dataClasses.course;
 
+import java.io.Serializable;
+
 public interface Task {
+
+
     int NOT_VERIFIED = 0;
     int ACCEPTED = 1;
     int NOT_BEGIN = 2;

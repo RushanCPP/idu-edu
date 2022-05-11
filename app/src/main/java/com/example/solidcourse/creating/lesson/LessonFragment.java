@@ -3,13 +3,6 @@ package com.example.solidcourse.creating.lesson;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.fragment.NavHostFragment;
-
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,11 +11,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.solidcourse.R;
 import com.example.solidcourse.creating.CourseViewModel;
+import com.example.solidcourse.creating.task.creating.TaskTypeDialog;
 import com.example.solidcourse.dataClasses.course.Lesson;
 import com.example.solidcourse.dataClasses.course.Task;
+import com.example.solidcourse.dataClasses.course.tasks.CountTask;
+import com.example.solidcourse.dataClasses.course.tasks.StudyTask;
 import com.example.solidcourse.databinding.FragmentLessonBinding;
 
 import java.util.List;
@@ -47,8 +50,9 @@ public class LessonFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         courseViewModel = new ViewModelProvider(requireActivity()).get(CourseViewModel.class);
-        binding = FragmentLessonBinding.inflate(inflater, container, false);
         lesson = courseViewModel.getLessonValue();
+
+        binding = FragmentLessonBinding.inflate(inflater, container, false);
 
         assert getContext() != null;
         adapter = new TasksAdapter(getContext(), R.layout.fragment_course_list_view_item, lesson.getTasks());
@@ -65,7 +69,8 @@ public class LessonFragment extends Fragment {
         }));
 
         binding.lessonFragmentAddTaskButton.setOnClickListener(view -> {
-            // TODO write that
+            TaskTypeDialog dialog = new TaskTypeDialog();
+            dialog.show(getParentFragmentManager(), "dialog");
         });
 
         binding.lessonFragmentLessonName.setText(lesson.getName());
@@ -76,7 +81,6 @@ public class LessonFragment extends Fragment {
             NavHostFragment.findNavController(this)
                     .navigate(R.id.action_lessonFragment_to_lessonEditingFragment)
         );
-
         return binding.getRoot();
     }
 
@@ -91,8 +95,18 @@ public class LessonFragment extends Fragment {
     public boolean onContextItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == ID_EDIT) {
-            // TODO write that
-            NavHostFragment.findNavController(this);
+            Task task = lesson.get(positionOfLongClick);
+            Toast.makeText(getContext(), "" + task.toString(), Toast.LENGTH_SHORT).show();
+            if (task instanceof CountTask) {
+                courseViewModel.setTask(task);
+                NavHostFragment.findNavController(this).navigate(R.id.action_lessonFragment_to_countTaskEditingFragment);
+            } else if (task instanceof StudyTask) {
+                courseViewModel.setTask(task);
+                NavHostFragment.findNavController(this).navigate(R.id.action_lessonFragment_to_studyTaskEditingFragment);
+            } else {
+                Toast.makeText(getContext(), "WTF!" + task, Toast.LENGTH_SHORT).show();
+                // throw new RuntimeException("Hello!");
+            }
         } else if (id == ID_DELETE) {
             lesson.remove(positionOfLongClick);
             adapter.notifyDataSetChanged();

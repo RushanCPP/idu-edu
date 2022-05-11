@@ -2,10 +2,13 @@ package com.example.solidcourse.dataClasses.course;
 
 import androidx.annotation.NonNull;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Paragraph {
+public class Paragraph implements Serializable {
+    private static final long serialVersionUID = 4L;
+
     String name;
     List<Lesson> lessons;
 

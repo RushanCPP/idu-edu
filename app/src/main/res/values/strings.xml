@@ -27,4 +27,10 @@
     <string name="edit_lesson">Изменить урок</string>
     <string name="ok">OK</string>
     <string name="cancel">Отменить</string>
+    <string name="time_out_task">Задание с ограничением по времени</string>
+    <string name="time_in_minutes">Время в минутах</string>
+    <string name="task_text">Текст задания</string>
+    <string name="task_score">Баллы за задание</string>
+    <string name="answer">Ответ</string>
+    <string name="edit_task">Изменить задание</string>
 </resources>

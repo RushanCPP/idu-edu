@@ -3,13 +3,6 @@ package com.example.solidcourse.creating.course;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.fragment.NavHostFragment;
-
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,6 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.solidcourse.R;
 import com.example.solidcourse.creating.CourseViewModel;
@@ -83,10 +82,9 @@ public class CourseFragment extends Fragment {
 
         binding.courseFragmentSaveButton.setOnClickListener(view -> {
             Thread sender = new Thread(() -> {
-                String serverIp = "192.168.100.7";
+                String serverIp = "192.168.43.244";
                 try (SocketAdapter socketAdapter = new SocketAdapter(new Socket(serverIp, 8000))) {
-                    String message = course.toString();
-                    socketAdapter.write(message);
+                    socketAdapter.write(course);
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
