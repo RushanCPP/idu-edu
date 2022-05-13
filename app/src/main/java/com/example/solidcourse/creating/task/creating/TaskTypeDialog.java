@@ -2,6 +2,8 @@ package com.example.solidcourse.creating.task.creating;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,21 +25,23 @@ public class TaskTypeDialog extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setSingleChoiceItems(getTypes(), -1, ((dialogInterface, index) -> {
             typeIndex.set(index);
-            // TODO WRITE NORM CHOICE NAME
-        }))
-                .setPositiveButton("OK", (dialogInterface, i) -> {
-            dialogInterface.cancel();
-            goToCreatingFragment(TaskType.values()[typeIndex.get()]);
-        })
-                .setNegativeButton("Отменить", ((dialogInterface, i) -> dialogInterface.cancel()));
+        })).setPositiveButton("OK", (dialogInterface, i) -> {
+                dialogInterface.cancel();
+                goToCreatingFragment(TaskType.values()[typeIndex.get()]);
+        }).setNegativeButton("Отменить", ((dialogInterface, i) -> dialogInterface.cancel()));
         return builder.create();
     }
 
     private String[] getTypes() {
-        // TODO REWRITE THIS
         String[] types = new String[TaskType.values().length];
-        for (int i = 0; i < TaskType.values().length; ++i) {
-            types[i] = TaskType.values()[i].toString();
+        for (int i = 0; i < types.length; ++i) {
+            if (TaskType.values()[i] == TaskType.COUNT_TASK) {
+                types[i] = "Задание на подсчет";
+            } else if (TaskType.values()[i] == TaskType.STUDY_TASK) {
+                types[i] = "Задание на изучение темы";
+            } else {
+                Log.e("ERROR_TASK_CREATING", "Тип не обрабатывается, допиши код" + TaskType.values()[i]);
+            }
         }
         return types;
     }

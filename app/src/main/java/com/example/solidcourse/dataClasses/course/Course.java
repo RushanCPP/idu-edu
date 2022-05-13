@@ -83,7 +83,6 @@ public class Course implements Serializable {
     }
 
 
-    // TODO DELETE ME
     @NonNull
     @Override
     public String toString() {

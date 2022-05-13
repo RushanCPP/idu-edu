@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/rusha/AndroidStudioProjects/SolidCourse/app/src/main/res/layout/activity_main.xml" value="0.18333333333333332" />
+        <entry key="..\:/Users/rusha/AndroidStudioProjects/SolidCourse/app/src/main/res/layout/content_test.xml" value="0.10416666666666667" />
         <entry key="..\:/Users/rusha/AndroidStudioProjects/SolidCourse/app/src/main/res/layout/dialog_fragment_task_decorator.xml" value="0.10260416666666666" />
         <entry key="..\:/Users/rusha/AndroidStudioProjects/SolidCourse/app/src/main/res/layout/dialog_fragment_task_type.xml" value="0.22" />
         <entry key="..\:/Users/rusha/AndroidStudioProjects/SolidCourse/app/src/main/res/layout/dialog_fragment_task_type_item.xml" value="0.18" />
@@ -18,11 +20,18 @@
         <entry key="..\:/Users/rusha/AndroidStudioProjects/SolidCourse/app/src/main/res/layout/fragment_paragraph.xml" value="0.25" />
         <entry key="..\:/Users/rusha/AndroidStudioProjects/SolidCourse/app/src/main/res/layout/fragment_paragraph_creating.xml" value="0.2" />
         <entry key="..\:/Users/rusha/AndroidStudioProjects/SolidCourse/app/src/main/res/layout/fragment_paragraph_editing.xml" value="0.25" />
-        <entry key="..\:/Users/rusha/AndroidStudioProjects/SolidCourse/app/src/main/res/layout/fragment_study_task_creating.xml" value="0.10416666666666667" />
-        <entry key="..\:/Users/rusha/AndroidStudioProjects/SolidCourse/app/src/main/res/layout/fragment_study_task_editing.xml" value="0.10260416666666666" />
+        <entry key="..\:/Users/rusha/AndroidStudioProjects/SolidCourse/app/src/main/res/layout/fragment_study_task_creating.xml" value="0.18" />
+        <entry key="..\:/Users/rusha/AndroidStudioProjects/SolidCourse/app/src/main/res/layout/fragment_study_task_editing.xml" value="0.25" />
         <entry key="..\:/Users/rusha/AndroidStudioProjects/SolidCourse/app/src/main/res/layout/fragment_task.xml" value="0.25" />
+        <entry key="..\:/Users/rusha/AndroidStudioProjects/SolidCourse/app/src/main/res/layout/main_toolbar.xml" value="0.10260416666666666" />
+        <entry key="..\:/Users/rusha/AndroidStudioProjects/SolidCourse/app/src/main/res/layout/nav_header_test.xml" value="0.5" />
+        <entry key="..\:/Users/rusha/AndroidStudioProjects/SolidCourse/app/src/main/res/layout/style.xml" value="0.10260416666666666" />
         <entry key="..\:/Users/rusha/AndroidStudioProjects/SolidCourse/app/src/main/res/layout/task_decorator_dialog_fragment.xml" value="0.2765011119347665" />
         <entry key="..\:/Users/rusha/AndroidStudioProjects/SolidCourse/app/src/main/res/layout/time_out_task_dialog.xml" value="0.22760416666666666" />
+        <entry key="..\:/Users/rusha/AndroidStudioProjects/SolidCourse/app/src/main/res/layout/zzzzzz_delete_me.xml" value="0.10416666666666667" />
+        <entry key="..\:/Users/rusha/AndroidStudioProjects/SolidCourse/app/src/main/res/menu/activity_main_drawer.xml" value="0.75" />
+        <entry key="..\:/Users/rusha/AndroidStudioProjects/SolidCourse/app/src/main/res/menu/main_activity_menu.xml" value="0.22" />
+        <entry key="..\:/Users/rusha/AndroidStudioProjects/SolidCourse/app/src/main/res/menu/test.xml" value="0.33" />
       </map>
     </option>
   </component>

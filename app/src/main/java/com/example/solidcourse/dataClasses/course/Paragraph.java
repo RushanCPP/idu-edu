@@ -71,7 +71,6 @@ public class Paragraph implements Serializable {
     }
 
 
-    // TODO DELETE ME
     @NonNull
     @Override
     public String toString() {

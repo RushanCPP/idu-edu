@@ -72,7 +72,6 @@ public class Lesson implements Serializable {
     }
 
 
-    // TODO DELETE ME
     @NonNull
     @Override
     public String toString() {

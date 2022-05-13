@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/create_new_course"
+        android:title="@string/create_new_course"/>
+    <item
+        android:id="@+id/courses_catalog"
+        android:title="@string/courses_catalog" />
+    <item
+        android:id="@+id/favourites_course"
+        android:title="@string/favourites_course" />
+    <item
+        android:id="@+id/user_settings"
+        android:title="@string/user_settings"/>
+</menu>

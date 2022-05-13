@@ -1,6 +1,7 @@
 package com.example.solidcourse.creating.task;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,7 @@ public class TaskFragment extends Fragment {
         CourseViewModel courseViewModel = new ViewModelProvider(requireActivity()).get(CourseViewModel.class);
         Task task = courseViewModel.getTask();
         StringBuilder builder = new StringBuilder(task.getText());
-        if (task instanceof CountTask) { // TODO
+        if (task instanceof CountTask) {
             builder.append("\n\nОтвет: ").append(((CountTask) task).getAnswerValue());
         }
         binding.fragmentTaskText.setText(builder.toString());
@@ -47,7 +48,7 @@ public class TaskFragment extends Fragment {
             } else if (task instanceof StudyTask) {
                 NavHostFragment.findNavController(this).navigate(R.id.action_taskFragment_to_studyTaskEditingFragment);
             } else {
-                // TODO DEBUG INFORMATION
+                Log.e("ERROR_TASK_CREATING", "Тип не обрабатывается, допиши код" + task);
                 Toast.makeText(getContext(), "Тип не обрабатывается, допиши код", Toast.LENGTH_SHORT).show();
             }
         });

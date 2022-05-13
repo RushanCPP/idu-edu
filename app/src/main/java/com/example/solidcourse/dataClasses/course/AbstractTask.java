@@ -70,7 +70,6 @@ public abstract class AbstractTask implements Task, Serializable {
         score = 0;
     }
 
-    // TODO DELETE ME
     @NonNull
     @Override
     public String toString() {
