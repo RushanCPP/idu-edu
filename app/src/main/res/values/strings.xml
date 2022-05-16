@@ -35,7 +35,7 @@
     <string name="courses_catalog">Каталог курсов</string>
     <string name="favourites_course">Избранные курсы</string>
     <string name="user_settings">Настроики пользователя</string>
-    <string name="create_new_course">Создать новый курс</string>
+    <string name="creating_my_course">Мои курсы</string>
     <string name="title_activity_test">TestActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -48,4 +48,7 @@
     <string name="menu_slideshow">Slideshow</string>
     <string name="task_editing">Редактирование задачи</string>
     <string name="creating_task">Создание задачи</string>
+    <string name="choice_course">Выберите курс</string>
+    <string name="available_course">Доступные курсы</string>
+    <string name="edit_my_courses">Изменить мои курсы!</string>
 </resources>

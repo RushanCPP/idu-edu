@@ -8,7 +8,8 @@ import java.util.List;
 
 public class Course implements Serializable {
     private static final long serialVersionUID = 2L;
-
+    public static final int NOT_INITIALIZED = -1;
+    long id = NOT_INITIALIZED;
     String name;
     String author;
     List<Paragraph> paragraphs;
@@ -91,5 +92,13 @@ public class Course implements Serializable {
                 ", author='" + author + '\'' +
                 ", paragraphs=" + paragraphs +
                 '}';
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

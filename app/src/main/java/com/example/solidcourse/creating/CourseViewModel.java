@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel;
 import com.example.solidcourse.dataClasses.course.Course;
 import com.example.solidcourse.dataClasses.course.Lesson;
 import com.example.solidcourse.dataClasses.course.Paragraph;
-import com.example.solidcourse.dataClasses.course.AbstractTask;
 import com.example.solidcourse.dataClasses.course.Task;
 
 public class CourseViewModel extends ViewModel {
@@ -14,9 +13,18 @@ public class CourseViewModel extends ViewModel {
     final MutableLiveData<Paragraph> paragraphMutableLiveData = new MutableLiveData<>();
     final MutableLiveData<Lesson> lessonMutableLiveData = new MutableLiveData<>();
     final MutableLiveData<Task> taskMutableLiveData = new MutableLiveData<>();
+    final MutableLiveData<Boolean> createNewMutableLiveData = new MutableLiveData<>();
 
     public Course getCourseValue() {
         return courseMutableLiveData.getValue();
+    }
+
+    public void setCreateValue(boolean value) {
+        createNewMutableLiveData.setValue(value);
+    }
+
+    public boolean getCreateValue() {
+        return createNewMutableLiveData.getValue();
     }
 
     public void setCourseValue(Course course) {

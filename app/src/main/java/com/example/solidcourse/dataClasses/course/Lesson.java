@@ -9,9 +9,26 @@ import java.util.List;
 public class Lesson implements Serializable {
     private static final long serialVersionUID = 3L;
 
-
     String name;
     List<Task> tasks;
+    long id;
+    long paragraphId;
+
+    public long getParagraphId() {
+        return paragraphId;
+    }
+
+    public void setParagraphId(long paragraphId) {
+        this.paragraphId = paragraphId;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public Lesson(String name) {
         this.name = name;

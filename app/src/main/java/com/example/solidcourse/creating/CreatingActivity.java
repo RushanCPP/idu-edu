@@ -1,9 +1,7 @@
 package com.example.solidcourse.creating;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -31,13 +29,8 @@ public class CreatingActivity extends AppCompatActivity {
                 Toast.makeText(this, "Любимые курсы!", Toast.LENGTH_SHORT).show();
                 setResult(ActivityID.FAVOURITE.ordinal());
                 finish();
-            } else if (id == R.id.create_new_course) {
-                setResult(ActivityID.CREATING_COURSE.ordinal());
-                finish();
-            } else if (id == R.id.user_settings) {
-                Toast.makeText(this, "Настройки пользователя!", Toast.LENGTH_SHORT).show();
-                setResult(ActivityID.SETTINGS.ordinal());
-                finish();
+            } else if (id == R.id.creating_my_courses) {
+                recreate();
             }
             return false;
         });

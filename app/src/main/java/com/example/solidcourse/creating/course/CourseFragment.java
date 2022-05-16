@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +25,7 @@ import com.example.solidcourse.dataClasses.course.Course;
 import com.example.solidcourse.dataClasses.course.Paragraph;
 import com.example.solidcourse.dataClasses.server.SocketAdapter;
 import com.example.solidcourse.databinding.FragmentCourseBinding;
+import com.example.solidcourse.creating.MyCoursesDataBase;
 
 import java.net.Socket;
 import java.util.List;
@@ -48,7 +50,6 @@ public class CourseFragment extends Fragment {
                              Bundle savedInstanceState) {
         courseViewModel = new ViewModelProvider(requireActivity()).get(CourseViewModel.class);
         course = courseViewModel.getCourseValue();
-
         com.example.solidcourse.databinding.FragmentCourseBinding binding = FragmentCourseBinding.inflate(inflater, container, false);
         binding.courseFragmentCourseName.setText(course.getName());
         binding.courseFragmentCourseAuthor.setText(course.getAuthor());
@@ -81,16 +82,28 @@ public class CourseFragment extends Fragment {
         );
 
         binding.courseFragmentSaveButton.setOnClickListener(view -> {
-            Thread sender = new Thread(() -> {
+            Thread saver = new Thread(() -> {
                 String serverIp = "192.168.43.244";
                 try (SocketAdapter socketAdapter = new SocketAdapter(new Socket(serverIp, 8000))) {
-                    socketAdapter.write(course);
+                    MyCoursesDataBase myCoursesDataBase = new MyCoursesDataBase(getContext());
+                    if (courseViewModel.getCreateValue()) {
+                        socketAdapter.writeObject("INSERT");
+                        socketAdapter.writeObject(course);
+                        long id = socketAdapter.readLong();
+                        course.setId(id);
+                    } else {
+                        socketAdapter.writeObject("UPDATE");
+                        socketAdapter.writeObject(course);
+                        myCoursesDataBase.updateCourse(course);
+                    }
+                    assert getActivity() == null;
+                    getActivity().runOnUiThread(() -> Toast.makeText(getContext(), "Save completed!", Toast.LENGTH_SHORT).show());
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
             });
 
-            sender.start();
+            saver.start();
         });
         return binding.getRoot();
     }
