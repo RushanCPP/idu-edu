@@ -11,6 +11,24 @@ public class Paragraph implements Serializable {
 
     String name;
     List<Lesson> lessons;
+    long id;
+    long courseId;
+
+    public long getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(long courseId) {
+        this.courseId = courseId;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public Paragraph(String name) {
         this.name = name;

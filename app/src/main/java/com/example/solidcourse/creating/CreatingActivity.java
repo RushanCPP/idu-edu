@@ -1,7 +1,8 @@
 package com.example.solidcourse.creating;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,11 +33,12 @@ public class CreatingActivity extends AppCompatActivity {
                 setResult(ActivityID.FAVOURITE.ordinal());
                 finish();
             } else if (id == R.id.create_new_course) {
-                setResult(ActivityID.CREATING_COURSE.ordinal());
                 finish();
             } else if (id == R.id.user_settings) {
                 Toast.makeText(this, "Настройки пользователя!", Toast.LENGTH_SHORT).show();
                 setResult(ActivityID.SETTINGS.ordinal());
+                finish();
+            } else if (id == R.id.edit_my_courses) {
                 finish();
             }
             return false;

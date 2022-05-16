@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel;
 import com.example.solidcourse.dataClasses.course.Course;
 import com.example.solidcourse.dataClasses.course.Lesson;
 import com.example.solidcourse.dataClasses.course.Paragraph;
-import com.example.solidcourse.dataClasses.course.AbstractTask;
 import com.example.solidcourse.dataClasses.course.Task;
 
 public class CourseViewModel extends ViewModel {

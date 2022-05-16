@@ -9,9 +9,12 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.example.solidcourse.creating.CreatingActivity;
+import com.example.solidcourse.dataClasses.course.Course;
+import com.example.solidcourse.favouriteCourses.CoursesDataBase;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,11 +31,19 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Любимые курсы!", Toast.LENGTH_SHORT).show();
             } else if (id == R.id.create_new_course) {
                 Intent intent = new Intent(this, CreatingActivity.class);
-                startActivityForResult(intent, 1, null);
+                startActivityForResult(intent, 1);
             } else if (id == R.id.user_settings) {
                 Toast.makeText(this, "Настройки пользователя!", Toast.LENGTH_SHORT).show();
+            } else if (id == R.id.edit_my_courses) {
+                Intent intent = new Intent(this, CreatingActivity.class);
+                startActivityForResult(intent, 1);
             }
             return false;
+        });
+        findViewById(R.id.button123).setOnClickListener(view -> {
+            CoursesDataBase coursesDataBase = new CoursesDataBase(this);
+            List<Course> courseList = coursesDataBase.selectAllCourses();
+            Toast.makeText(this, "" + courseList, Toast.LENGTH_SHORT).show();
         });
     }
 

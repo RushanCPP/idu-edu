@@ -11,6 +11,24 @@ public abstract class AbstractTask implements Task, Serializable {
     protected String text;
     protected int score = 0;
     protected int maxScore;
+    long id;
+    long lessonId;
+
+    public long getLessonId() {
+        return lessonId;
+    }
+
+    public void setLessonId(long lessonId) {
+        this.lessonId = lessonId;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     abstract public void answer(String answer);
 

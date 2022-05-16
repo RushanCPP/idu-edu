@@ -24,6 +24,7 @@ import com.example.solidcourse.dataClasses.course.Course;
 import com.example.solidcourse.dataClasses.course.Paragraph;
 import com.example.solidcourse.dataClasses.server.SocketAdapter;
 import com.example.solidcourse.databinding.FragmentCourseBinding;
+import com.example.solidcourse.favouriteCourses.CoursesDataBase;
 
 import java.net.Socket;
 import java.util.List;
@@ -48,7 +49,6 @@ public class CourseFragment extends Fragment {
                              Bundle savedInstanceState) {
         courseViewModel = new ViewModelProvider(requireActivity()).get(CourseViewModel.class);
         course = courseViewModel.getCourseValue();
-
         com.example.solidcourse.databinding.FragmentCourseBinding binding = FragmentCourseBinding.inflate(inflater, container, false);
         binding.courseFragmentCourseName.setText(course.getName());
         binding.courseFragmentCourseAuthor.setText(course.getAuthor());
@@ -81,16 +81,26 @@ public class CourseFragment extends Fragment {
         );
 
         binding.courseFragmentSaveButton.setOnClickListener(view -> {
+            /*
             Thread sender = new Thread(() -> {
                 String serverIp = "192.168.43.244";
                 try (SocketAdapter socketAdapter = new SocketAdapter(new Socket(serverIp, 8000))) {
-                    socketAdapter.write(course);
+                    socketAdapter.writeObject(course);
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
             });
 
-            sender.start();
+            sender.start();*/
+            Thread saver = new Thread(() -> {
+                CoursesDataBase coursesDataBase = new CoursesDataBase(getContext());
+                if (course.getId() == Course.NOT_INITIALIZED) {
+                    coursesDataBase.insertCourse(course);
+                } else {
+                    coursesDataBase.updateCourse(course);
+                }
+            });
+            saver.start();
         });
         return binding.getRoot();
     }

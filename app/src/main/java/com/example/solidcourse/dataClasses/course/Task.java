@@ -1,13 +1,8 @@
 package com.example.solidcourse.dataClasses.course;
 
-import java.io.Serializable;
-
 public interface Task {
-
-
-    int NOT_VERIFIED = 0;
-    int ACCEPTED = 1;
-    int NOT_BEGIN = 2;
+    int NOT_BEGIN = 1;
+    int ACCEPTED = 2;
     int NOT_ACCEPTED = 3;
 
     String getText();
@@ -31,4 +26,9 @@ public interface Task {
     void setState(int state);
 
     void answer(String answer);
+
+    void setId(long id);
+    long getId();
+    void setLessonId(long id);
+    long getLessonId();
 }

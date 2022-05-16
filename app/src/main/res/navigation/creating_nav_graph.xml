@@ -133,4 +133,13 @@
         android:name="com.example.solidcourse.creating.task.StudyTaskEditingFragment"
         android:label="fragment_study_task_editing"
         tools:layout="@layout/fragment_study_task_editing" />
+    <fragment
+        android:id="@+id/createdCourseCatalogFragment"
+        android:name="com.example.solidcourse.creating.course.CreatedCourseCatalogFragment"
+        android:label="fragment_created_course_catalog"
+        tools:layout="@layout/fragment_created_course_catalog" >
+        <action
+            android:id="@+id/action_createdCourseCatalogFragment_to_courseFragment"
+            app:destination="@id/courseFragment" />
+    </fragment>
 </navigation>
