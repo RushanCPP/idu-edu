@@ -4,6 +4,9 @@
         android:id="@+id/creating_my_courses"
         android:title="@string/creating_my_course"/>
     <item
+        android:id="@+id/edit_my_courses"
+        android:title="@string/edit_my_courses" />
+    <item
         android:id="@+id/courses_catalog"
         android:title="@string/courses_catalog" />
     <item
