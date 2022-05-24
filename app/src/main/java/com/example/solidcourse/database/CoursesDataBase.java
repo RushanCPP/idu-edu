@@ -1,4 +1,4 @@
-package com.example.solidcourse.favouriteCourses;
+package com.example.solidcourse.database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -15,16 +15,16 @@ import com.example.solidcourse.dataClasses.course.tasks.StudyTask;
 
 import java.util.ArrayList;
 import java.util.List;
-
-public class FavouritesCoursesDataBase {
-    private static final String DATA_BASE_NAME = "favourite_courses.db";
-    private static final int DATA_BASE_VERSION = 2;
+public class CoursesDataBase {
+    private static final String DATA_BASE_NAME = "courses.db";
+    private static final int DATA_BASE_VERSION = 1;
+    private final SQLiteDatabase database;
     CourseTable courseTable;
     ParagraphTable paragraphTable;
     LessonTable lessonTable;
     StudyTaskTable studyTaskTable;
     CountTaskTable countTaskTable;
-    // OpenHelper!
+// OpenHelper!
     private class OpenHelper extends SQLiteOpenHelper {
         public OpenHelper(Context context) {
             super(context, DATA_BASE_NAME, null, DATA_BASE_VERSION);
@@ -48,18 +48,14 @@ public class FavouritesCoursesDataBase {
         }
     }
 
-    public FavouritesCoursesDataBase(Context context) {
+    public CoursesDataBase(Context context) {
         OpenHelper openHelper = new OpenHelper(context);
-        SQLiteDatabase database = openHelper.getWritableDatabase();
+        database = openHelper.getWritableDatabase();
         courseTable = CourseTable.getInstance(database);
         paragraphTable = ParagraphTable.getInstance(database);
         lessonTable = LessonTable.getInstance(database);
         studyTaskTable = StudyTaskTable.getInstance(database);
         countTaskTable = CountTaskTable.getInstance(database);
-    }
-
-    public boolean existsCourse(long id) {
-        return courseTable.exists(id);
     }
 
     public Course selectCourse(long id) {
@@ -95,7 +91,6 @@ public class FavouritesCoursesDataBase {
     }
 
     public long insertCourse(Course course) {
-
         long id = courseTable.insert(course);
         for (Paragraph paragraph : course.getParagraphs()) {
             paragraph.setCourseId(course.getId());
@@ -106,7 +101,7 @@ public class FavouritesCoursesDataBase {
 
     public Paragraph selectParagraph(long id) {
         Paragraph paragraph = paragraphTable.select(id);
-        paragraph.setLessons(selectAllLessons(id));
+        // TODO!
         return paragraph;
     }
 
@@ -135,10 +130,9 @@ public class FavouritesCoursesDataBase {
         paragraphTable.deleteAll(courseId);
     }
 
-
     public int updateParagraph(Paragraph paragraph) {
         int result = paragraphTable.update(paragraph);
-        deleteAllLessons(paragraph.getId());
+        lessonTable.deleteAll(paragraph.getId());
         for (Lesson lesson : paragraph.getLessons()) {
             lesson.setParagraphId(paragraph.getId());
             lessonTable.insert(lesson);
@@ -196,9 +190,9 @@ public class FavouritesCoursesDataBase {
         for (Task task : lesson.getTasks()) {
             task.setLessonId(lesson.getId());
             if (task instanceof StudyTask) {
-                insertStudyTask((StudyTask) task);
+                studyTaskTable.insert((StudyTask) task);
             } else if (task instanceof CountTask) {
-                insertCountTask((CountTask) task);
+                countTaskTable.insert((CountTask) task);
             }
         }
         return result;
@@ -283,15 +277,6 @@ public class FavouritesCoursesDataBase {
         }
 
         // TABLE EDITING METHODS
-        public boolean exists(long id) {
-            String query = "SELECT * FROM " + TABLE_NAME +
-                    " WHERE " + COLUMN_ID + " = " + id;
-            Cursor cursor = database.rawQuery(query, null);
-            int count = cursor.getCount();
-            cursor.close();
-            return count > 0;
-        }
-
         public long insert(Course course) {
             ContentValues contentValues = new ContentValues();
             contentValues.put(COLUMN_NAME, course.getName());
@@ -377,7 +362,7 @@ public class FavouritesCoursesDataBase {
 
         public static ParagraphTable getInstance(SQLiteDatabase database) {
             if (instance == null) {
-                synchronized (ParagraphTable.class) {
+                synchronized (CourseTable.class) {
                     if (instance == null) {
                         instance = new ParagraphTable(database);
                     }
@@ -392,7 +377,7 @@ public class FavouritesCoursesDataBase {
                     COLUMN_COURSE_ID + " INTEGER, " +
                     COLUMN_NAME + " NTEXT, " +
                     "FOREIGN KEY (" + COLUMN_COURSE_ID + ") " +
-                    "REFERENCES " + TABLE_NAME + " (" + CourseTable.COLUMN_ID + ") " +
+                    "REFERENCES " + CourseTable.TABLE_NAME + " (" + CourseTable.COLUMN_ID + ") " +
                     "ON UPDATE CASCADE " +
                     "ON DELETE CASCADE " +
                     "); ";
@@ -490,7 +475,7 @@ public class FavouritesCoursesDataBase {
 
         public static LessonTable getInstance(SQLiteDatabase database) {
             if (instance == null) {
-                synchronized (LessonTable.class) {
+                synchronized (CourseTable.class) {
                     if (instance == null) {
                         instance = new LessonTable(database);
                     }
@@ -604,7 +589,7 @@ public class FavouritesCoursesDataBase {
 
         public static StudyTaskTable getInstance(SQLiteDatabase database) {
             if (instance == null) {
-                synchronized (StudyTaskTable.class) {
+                synchronized (CourseTable.class) {
                     if (instance == null) {
                         instance = new StudyTaskTable(database);
                     }
@@ -747,7 +732,7 @@ public class FavouritesCoursesDataBase {
 
         public static CountTaskTable getInstance(SQLiteDatabase database) {
             if (instance == null) {
-                synchronized (CountTaskTable.class) {
+                synchronized (CourseTable.class) {
                     if (instance == null) {
                         instance = new CountTaskTable(database);
                     }
@@ -886,3 +871,11 @@ public class FavouritesCoursesDataBase {
         private static final int NUM_COLUMN_ANSWER_VALUE = 6;
     }
 }
+
+/** TODO-LIST
+ *      1) Write task creating!
+ *      2) Divide to class-tables
+ *      3) Write saving in DB!
+ *          a) when saving course send to server and id of course send reverse
+ *          b) when phone had gotten id of course he save that in own DataBase;
+ */

@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SolidCourse">
         <activity
+            android:name=".education.EducationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".catalog.CoursesCatalog"
+            android:exported="false" />
+        <activity
             android:name=".creating.CreatingActivity"
             android:exported="false" />
         <activity

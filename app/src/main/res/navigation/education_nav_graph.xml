@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/education_nav_graph"
+    app:startDestination="@id/educationCoursesFragment">
+    <fragment
+        android:id="@+id/educationCoursesFragment"
+        android:name="com.example.solidcourse.education.EducationCoursesFragment"
+        android:label="fragment_education_courses"
+        tools:layout="@layout/fragment_education_courses" >
+        <action
+            android:id="@+id/action_educationCoursesFragment_to_educationCourseFragment"
+            app:destination="@id/educationCourseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/educationParagraphFragment"
+        android:name="com.example.solidcourse.education.EducationParagraphFragment"
+        android:label="fragment_education_paragraph"
+        tools:layout="@layout/fragment_education_paragraph" >
+        <action
+            android:id="@+id/action_educationParagraphFragment_to_educationLessonFragment"
+            app:destination="@id/educationLessonFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/educationCourseFragment"
+        android:name="com.example.solidcourse.education.EducationCourseFragment"
+        android:label="fragment_education_course"
+        tools:layout="@layout/fragment_education_course" >
+        <action
+            android:id="@+id/action_educationCourseFragment_to_educationParagraphFragment"
+            app:destination="@id/educationParagraphFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/educationLessonFragment"
+        android:name="com.example.solidcourse.education.EducationLessonFragment"
+        android:label="fragment_education_lesson"
+        tools:layout="@layout/fragment_education_lesson" >
+        <action
+            android:id="@+id/action_educationLessonFragment_to_educationStudyTaskFragment"
+            app:destination="@id/educationStudyTaskFragment" />
+        <action
+            android:id="@+id/action_educationLessonFragment_to_educationCountTaskFragment"
+            app:destination="@id/educationCountTaskFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/educationStudyTaskFragment"
+        android:name="com.example.solidcourse.education.EducationStudyTaskFragment"
+        android:label="fragment_education_study_task"
+        tools:layout="@layout/fragment_education_study_task" />
+    <fragment
+        android:id="@+id/educationCountTaskFragment"
+        android:name="com.example.solidcourse.education.EducationCountTaskFragment"
+        android:label="fragment_education_count_task"
+        tools:layout="@layout/fragment_education_count_task" />
+</navigation>

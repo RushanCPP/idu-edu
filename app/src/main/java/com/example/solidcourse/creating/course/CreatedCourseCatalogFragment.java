@@ -10,7 +10,10 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -25,23 +28,34 @@ import com.example.solidcourse.creating.MyCoursesDataBase;
 import java.util.List;
 
 public class CreatedCourseCatalogFragment extends Fragment {
+    private static final int ID_DELETE = 102;
+
     FragmentCreatedCourseCatalogBinding binding;
     List<Course> courses;
+    int positionOfLongClick = 0;
+    MyCoursesDataBase dataBase;
+    CoursesListViewAdapter adapter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentCreatedCourseCatalogBinding.inflate(inflater, container, false);
-        MyCoursesDataBase dataBase = new MyCoursesDataBase(getContext());
+        dataBase = new MyCoursesDataBase(getContext());
         courses = dataBase.selectAllCourses();
-        assert getContext() == null;
-        binding.availableCoursesCatalog.setAdapter(new CoursesListViewAdapter(getContext(), R.layout.fragment_course_list_view_item, courses));
+        assert getContext() != null;
+        adapter = new CoursesListViewAdapter(getContext(), R.layout.fragment_course_list_view_item, courses);
+        binding.availableCoursesCatalog.setAdapter(adapter);
         binding.availableCoursesCatalog.setOnItemClickListener((adapterView, view, index, lastParam) -> {
             Course course = courses.get(index);
             CourseViewModel courseViewModel = new ViewModelProvider(requireActivity()).get(CourseViewModel.class);
             courseViewModel.setCourseValue(course);
             courseViewModel.setCreateValue(false);
             NavHostFragment.findNavController(this).navigate(R.id.action_createdCourseCatalogFragment_to_courseFragment);
+        });
+        binding.availableCoursesCatalog.setOnItemLongClickListener((adapterView, view, index, lastParam) -> {
+            positionOfLongClick = index;
+            registerForContextMenu(view);
+            return false;
         });
         binding.createNewCourseButton.setOnClickListener(view -> {
             CourseViewModel courseViewModel = new ViewModelProvider(requireActivity()).get(CourseViewModel.class);
@@ -50,6 +64,25 @@ public class CreatedCourseCatalogFragment extends Fragment {
         });
         return binding.getRoot();
     }
+
+    @Override
+    public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        menu.add(Menu.NONE, ID_DELETE, Menu.NONE, "Удалить");
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == ID_DELETE) {
+            dataBase.deleteCourse(courses.get(positionOfLongClick).getId());
+            adapter.notifyDataSetChanged();
+        } else {
+            return false;
+        }
+        return true;
+    }
+
 
     private static class CoursesListViewAdapter extends ArrayAdapter<Course> {
         public CoursesListViewAdapter(@NonNull Context context, int resource, @NonNull List<Course> objects) {

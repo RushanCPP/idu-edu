@@ -886,11 +886,3 @@ public class MyCoursesDataBase {
         private static final int NUM_COLUMN_ANSWER_VALUE = 6;
     }
 }
-
-/** TODO-LIST
- *      1) Write task creating!
- *      2) Divide to class-tables
- *      3) Write saving in DB!
- *          a) when saving course send to server and id of course send reverse
- *          b) when phone had gotten id of course he save that in own DataBase;
- */

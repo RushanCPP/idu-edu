@@ -51,4 +51,16 @@
     <string name="choice_course">Выберите курс</string>
     <string name="available_course">Доступные курсы</string>
     <string name="edit_my_courses">Изменить мои курсы!</string>
+    <string name="name">Название:</string>
+    <string name="author">Автор:</string>
+    <string name="add_to_favourites">Добавить в избранные</string>
+    <string name="go_to_course">Перейти к курсу</string>
+    <string name="course">Курс</string>
+    <string name="paragraphs">Главы</string>
+    <string name="lessons">Уроки:</string>
+    <string name="tasks">Задания:</string>
+    <string name="label_text_task">Материал задания:</string>
+    <string name="read">Прочитано</string>
+    <string name="text_of_task">Условие задачи</string>
+    <string name="answer_to">Ответить</string>
 </resources>

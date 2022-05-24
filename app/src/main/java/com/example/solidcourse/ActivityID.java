@@ -7,4 +7,5 @@ public enum ActivityID {
     SETTINGS,
     FAVOURITE,
     CATALOG_OF_COURSES,
+    EDUCATION,
 }

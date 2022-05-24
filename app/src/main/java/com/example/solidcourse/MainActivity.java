@@ -8,9 +8,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.solidcourse.catalog.CoursesCatalog;
 import com.example.solidcourse.creating.CreatingActivity;
 import com.example.solidcourse.dataClasses.course.Course;
 import com.example.solidcourse.creating.MyCoursesDataBase;
+import com.example.solidcourse.education.EducationActivity;
 
 import java.util.List;
 
@@ -27,7 +29,11 @@ public class MainActivity extends AppCompatActivity {
             int id = item.getItemId();
             if (id == R.id.courses_catalog) {
                 Toast.makeText(this, "Каталог курсов!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, CoursesCatalog.class);
+                startActivityForResult(intent, 1);
             } else if (id == R.id.favourites_course) {
+                Intent intent = new Intent(this, EducationActivity.class);
+                startActivityForResult(intent, 1);
                 Toast.makeText(this, "Любимые курсы!", Toast.LENGTH_SHORT).show();
             } else if (id == R.id.creating_my_courses) {
                 Intent intent = new Intent(this, CreatingActivity.class);

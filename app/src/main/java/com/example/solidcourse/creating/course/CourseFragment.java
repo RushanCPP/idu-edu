@@ -84,19 +84,20 @@ public class CourseFragment extends Fragment {
         binding.courseFragmentSaveButton.setOnClickListener(view -> {
             Thread saver = new Thread(() -> {
                 String serverIp = "192.168.43.244";
-                try (SocketAdapter socketAdapter = new SocketAdapter(new Socket(serverIp, 8000))) {
+                try (SocketAdapter socketAdapter = new SocketAdapter(new Socket(serverIp, 8080))) {
                     MyCoursesDataBase myCoursesDataBase = new MyCoursesDataBase(getContext());
+                    assert getActivity() != null;
                     if (courseViewModel.getCreateValue()) {
-                        socketAdapter.writeObject("INSERT");
+                        socketAdapter.writeLine("INSERT");
+                        getActivity().runOnUiThread(() -> Toast.makeText(getContext(), "Write object!", Toast.LENGTH_SHORT).show());
                         socketAdapter.writeObject(course);
                         long id = socketAdapter.readLong();
                         course.setId(id);
                     } else {
-                        socketAdapter.writeObject("UPDATE");
+                        socketAdapter.writeLine("UPDATE");
                         socketAdapter.writeObject(course);
                         myCoursesDataBase.updateCourse(course);
                     }
-                    assert getActivity() == null;
                     getActivity().runOnUiThread(() -> Toast.makeText(getContext(), "Save completed!", Toast.LENGTH_SHORT).show());
                 } catch (Exception exception) {
                     exception.printStackTrace();
