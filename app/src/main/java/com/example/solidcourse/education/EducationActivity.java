@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModelProvider;
 import android.os.Bundle;
 
 import com.example.solidcourse.ActivityID;
-import com.example.solidcourse.ActivityViewModel;
 import com.example.solidcourse.R;
 
 public class EducationActivity extends AppCompatActivity {
@@ -16,7 +15,6 @@ public class EducationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_education);
         assert getSupportActionBar() != null;
-        ActivityViewModel viewModel = new ViewModelProvider(this).get(ActivityViewModel.class);
         getSupportActionBar().hide();
         Toolbar toolbar = findViewById(R.id.main_toolbar_id);
         toolbar.setTitle("Solid Course");

@@ -4,16 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SplashActivity">
+    tools:context=".MainActivity">
 
-    <ImageView
-        android:layout_width="304dp"
-        android:layout_height="304dp"
-        android:src="@drawable/download"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+    <androidx.appcompat.widget.Toolbar
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription" />
+        android:id="@+id/main_toolbar_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/purple_500"
+        app:titleTextColor="@color/white"
+        app:menu="@menu/main_activity_menu"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

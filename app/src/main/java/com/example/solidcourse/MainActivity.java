@@ -2,7 +2,7 @@ package com.example.solidcourse;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.appcompat.widget.Toolbar;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -13,9 +13,8 @@ import com.example.solidcourse.creating.CreatingActivity;
 import com.example.solidcourse.education.EducationActivity;
 
 @SuppressLint("CustomSplashScreen")
-public class SplashActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
     ActivityID activityID;
-    ActivityViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,32 +22,20 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         assert getSupportActionBar() != null;
         getSupportActionBar().hide();
-
-        viewModel = new ViewModelProvider(this).get(ActivityViewModel.class);
-        activityID = viewModel.getValue();
-        Thread goTo = new Thread(() -> {
-            try {
-                Thread.sleep(200);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        Toolbar toolbar = findViewById(R.id.main_toolbar_id);
+        toolbar.setTitle("Solid Course");
+        toolbar.setOnMenuItemClickListener(item -> {
+            int id = item.getItemId();
+            if (id == R.id.courses_catalog) {
+                activityID = ActivityID.COURSES_CATALOG;
+            } else if (id == R.id.favourites_course) {
+                activityID = ActivityID.FAVOURITE_COURSES;
+            } else if (id == R.id.creating_my_courses) {
+                activityID = ActivityID.CREATING_COURSE;
             }
-            runOnUiThread(() -> goToActivity(activityID));
+            goToActivity(activityID);
+            return false;
         });
-        goTo.start();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Thread goTo = new Thread(() -> {
-            try {
-                Thread.sleep(200);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            runOnUiThread(() -> goToActivity(activityID));
-        });
-        goTo.start();
     }
 
     private void goToActivity(ActivityID id) {
@@ -69,7 +56,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
             activityID = ActivityID.values()[resultCode];
-            viewModel.setValue(activityID);
+            goToActivity(activityID);
         }
     }
 }

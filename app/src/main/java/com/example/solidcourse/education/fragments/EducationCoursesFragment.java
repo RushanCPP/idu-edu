@@ -42,7 +42,7 @@ public class EducationCoursesFragment extends Fragment {
         EducationViewModel viewModel = new ViewModelProvider(requireActivity()).get(EducationViewModel.class);
         binding = FragmentEducationCoursesBinding.inflate(inflater, container, false);
         assert getContext() != null;
-        CoursesListViewAdapter adapter = new CoursesListViewAdapter(getContext(), R.layout.fragment_course_list_view_item, courses);
+        adapter = new CoursesListViewAdapter(getContext(), R.layout.fragment_course_list_view_item, courses);
         dataBase = new FavouritesCoursesDataBase(getContext());
         // Загрузка в отдельном потоке для того чтобы главный поток не останавливался
         Runnable runnable = () -> {
@@ -77,7 +77,8 @@ public class EducationCoursesFragment extends Fragment {
     public boolean onContextItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == ID_DELETE) {
-            Runnable deleter = () -> dataBase.deleteCourse(courses.get(positionOfLongClick).getId());
+            long courseId = courses.get(positionOfLongClick).getId();
+            Runnable deleter = () -> dataBase.deleteCourse(courseId);
             deleter.run();
             courses.remove(positionOfLongClick);
             adapter.notifyDataSetChanged();

@@ -19,7 +19,7 @@ import java.util.List;
 @SuppressWarnings("ALL")
 public class MyCoursesDataBase {
     private static final String DATA_BASE_NAME = "created_courses.db";
-    private static final int DATA_BASE_VERSION = 10;
+    private static final int DATA_BASE_VERSION = 11;
     CourseTable courseTable;
     ParagraphTable paragraphTable;
     LessonTable lessonTable;

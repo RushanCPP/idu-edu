@@ -19,7 +19,7 @@ import java.util.List;
 @SuppressWarnings("ALL")
 public class FavouritesCoursesDataBase {
     private static final String DATA_BASE_NAME = "favourite_courses.db";
-    private static final int DATA_BASE_VERSION = 10;
+    private static final int DATA_BASE_VERSION = 11;
     CourseTable courseTable;
     ParagraphTable paragraphTable;
     LessonTable lessonTable;
@@ -89,6 +89,7 @@ public class FavouritesCoursesDataBase {
 
     public void deleteCourse(long courseId) {
         courseTable.delete(courseId);
+        paragraphTable.deleteAll(courseId);
     }
 
     public void deleteAllCourses() {

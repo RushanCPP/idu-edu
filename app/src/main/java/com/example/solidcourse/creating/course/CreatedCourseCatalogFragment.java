@@ -80,18 +80,19 @@ public class CreatedCourseCatalogFragment extends Fragment {
     public boolean onContextItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == ID_DELETE) {
+            long courseId = courses.get(positionOfLongClick).getId();
             Thread senderToServer = new Thread(() -> {
                 String serverIp = "192.168.43.244";
-
                 try (SocketAdapter socketAdapter = new SocketAdapter(new Socket(serverIp, 8080))) {
                     socketAdapter.writeLine("DELETE");
-                    socketAdapter.writeLong(courses.get(positionOfLongClick).getId());
+                    socketAdapter.writeLong(courseId);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             });
             senderToServer.start();
-            dataBase.deleteCourse(courses.get(positionOfLongClick).getId());
+            dataBase.deleteCourse(courseId);
+            courses.remove(positionOfLongClick);
             adapter.notifyDataSetChanged();
         } else {
             return false;
