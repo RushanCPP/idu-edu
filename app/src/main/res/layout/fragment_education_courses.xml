@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".education.EducationCoursesFragment">
+    tools:context=".education.fragments.EducationCoursesFragment">
 
     <TextView
         android:id="@+id/label_courses"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="@string/courses_catalog"
+        android:text="@string/favourites_courses"
         android:textSize="30sp"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="0dp" />

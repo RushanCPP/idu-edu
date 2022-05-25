@@ -1,9 +1,9 @@
 package com.example.solidcourse.creating;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.example.solidcourse.ActivityID;
 import com.example.solidcourse.R;
@@ -22,15 +22,11 @@ public class CreatingActivity extends AppCompatActivity {
         binding.mainToolbarId.setOnMenuItemClickListener(item -> {
             int id = item.getItemId();
             if (id == R.id.courses_catalog) {
-                Toast.makeText(this, "Каталог курсов!", Toast.LENGTH_SHORT).show();
-                setResult(ActivityID.CATALOG_OF_COURSES.ordinal());
+                setResult(ActivityID.COURSES_CATALOG.ordinal());
                 finish();
             } else if (id == R.id.favourites_course) {
-                Toast.makeText(this, "Любимые курсы!", Toast.LENGTH_SHORT).show();
-                setResult(ActivityID.FAVOURITE.ordinal());
+                setResult(ActivityID.FAVOURITE_COURSES.ordinal());
                 finish();
-            } else if (id == R.id.creating_my_courses) {
-                recreate();
             }
             return false;
         });

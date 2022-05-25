@@ -63,4 +63,6 @@
     <string name="read">Прочитано</string>
     <string name="text_of_task">Условие задачи</string>
     <string name="answer_to">Ответить</string>
+    <string name="try_again">Решить снова</string>
+    <string name="favourites_courses">Избранные курсы</string>
 </resources>

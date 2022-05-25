@@ -15,10 +15,11 @@ import com.example.solidcourse.dataClasses.course.tasks.StudyTask;
 
 import java.util.ArrayList;
 import java.util.List;
-public class CoursesDataBase {
-    private static final String DATA_BASE_NAME = "courses.db";
-    private static final int DATA_BASE_VERSION = 1;
-    private final SQLiteDatabase database;
+
+@SuppressWarnings("ALL")
+public class MyCoursesDataBase {
+    private static final String DATA_BASE_NAME = "created_courses.db";
+    private static final int DATA_BASE_VERSION = 10;
     CourseTable courseTable;
     ParagraphTable paragraphTable;
     LessonTable lessonTable;
@@ -48,14 +49,18 @@ public class CoursesDataBase {
         }
     }
 
-    public CoursesDataBase(Context context) {
+    public MyCoursesDataBase(Context context) {
         OpenHelper openHelper = new OpenHelper(context);
-        database = openHelper.getWritableDatabase();
+        SQLiteDatabase database = openHelper.getWritableDatabase();
         courseTable = CourseTable.getInstance(database);
         paragraphTable = ParagraphTable.getInstance(database);
         lessonTable = LessonTable.getInstance(database);
         studyTaskTable = StudyTaskTable.getInstance(database);
         countTaskTable = CountTaskTable.getInstance(database);
+    }
+
+    public boolean existsCourse(long id) {
+        return courseTable.exists(id);
     }
 
     public Course selectCourse(long id) {
@@ -91,6 +96,7 @@ public class CoursesDataBase {
     }
 
     public long insertCourse(Course course) {
+
         long id = courseTable.insert(course);
         for (Paragraph paragraph : course.getParagraphs()) {
             paragraph.setCourseId(course.getId());
@@ -101,7 +107,7 @@ public class CoursesDataBase {
 
     public Paragraph selectParagraph(long id) {
         Paragraph paragraph = paragraphTable.select(id);
-        // TODO!
+        paragraph.setLessons(selectAllLessons(id));
         return paragraph;
     }
 
@@ -130,9 +136,10 @@ public class CoursesDataBase {
         paragraphTable.deleteAll(courseId);
     }
 
+
     public int updateParagraph(Paragraph paragraph) {
         int result = paragraphTable.update(paragraph);
-        lessonTable.deleteAll(paragraph.getId());
+        deleteAllLessons(paragraph.getId());
         for (Lesson lesson : paragraph.getLessons()) {
             lesson.setParagraphId(paragraph.getId());
             lessonTable.insert(lesson);
@@ -190,9 +197,9 @@ public class CoursesDataBase {
         for (Task task : lesson.getTasks()) {
             task.setLessonId(lesson.getId());
             if (task instanceof StudyTask) {
-                studyTaskTable.insert((StudyTask) task);
+                insertStudyTask((StudyTask) task);
             } else if (task instanceof CountTask) {
-                countTaskTable.insert((CountTask) task);
+                insertCountTask((CountTask) task);
             }
         }
         return result;
@@ -277,14 +284,22 @@ public class CoursesDataBase {
         }
 
         // TABLE EDITING METHODS
+        public boolean exists(long id) {
+            String query = "SELECT * FROM " + TABLE_NAME +
+                    " WHERE " + COLUMN_ID + " = " + id;
+            Cursor cursor = database.rawQuery(query, null);
+            int count = cursor.getCount();
+            cursor.close();
+            return count > 0;
+        }
+
         public long insert(Course course) {
             ContentValues contentValues = new ContentValues();
             contentValues.put(COLUMN_NAME, course.getName());
             contentValues.put(COLUMN_AUTHOR, course.getAuthor());
-            // TODO WRITE SENDING TO DB, and get id!
-            long id = database.insert(TABLE_NAME, null, contentValues);
-            course.setId(id);
-            return id;
+            contentValues.put(COLUMN_ID, course.getId());
+            database.insert(TABLE_NAME, null, contentValues);
+            return course.getId();
         }
 
         public Course select(long id) {
@@ -362,7 +377,7 @@ public class CoursesDataBase {
 
         public static ParagraphTable getInstance(SQLiteDatabase database) {
             if (instance == null) {
-                synchronized (CourseTable.class) {
+                synchronized (ParagraphTable.class) {
                     if (instance == null) {
                         instance = new ParagraphTable(database);
                     }
@@ -393,7 +408,6 @@ public class CoursesDataBase {
             ContentValues contentValues = new ContentValues();
             contentValues.put(COLUMN_COURSE_ID, paragraph.getCourseId());
             contentValues.put(COLUMN_NAME, paragraph.getName());
-            // TODO WRITE SENDING TO DB, and get id!
             long id = database.insert(TABLE_NAME, null, contentValues);
             paragraph.setId(id);
             return id;
@@ -475,7 +489,7 @@ public class CoursesDataBase {
 
         public static LessonTable getInstance(SQLiteDatabase database) {
             if (instance == null) {
-                synchronized (CourseTable.class) {
+                synchronized (LessonTable.class) {
                     if (instance == null) {
                         instance = new LessonTable(database);
                     }
@@ -506,7 +520,6 @@ public class CoursesDataBase {
             ContentValues contentValues = new ContentValues();
             contentValues.put(COLUMN_PARAGRAPH_ID, lesson.getParagraphId());
             contentValues.put(COLUMN_NAME, lesson.getName());
-            // TODO WRITE SENDING TO DB, and get id!
             long id = database.insert(TABLE_NAME, null, contentValues);
             lesson.setId(id);
             return id;
@@ -589,7 +602,7 @@ public class CoursesDataBase {
 
         public static StudyTaskTable getInstance(SQLiteDatabase database) {
             if (instance == null) {
-                synchronized (CourseTable.class) {
+                synchronized (StudyTaskTable.class) {
                     if (instance == null) {
                         instance = new StudyTaskTable(database);
                     }
@@ -627,7 +640,6 @@ public class CoursesDataBase {
             contentValues.put(COLUMN_SCORE, studyTask.getScore());
             contentValues.put(COLUMN_STATE, studyTask.getState());
 
-            // TODO WRITE SENDING TO DB, and get id!
             long id = database.insert(TABLE_NAME, null, contentValues);
             studyTask.setId(id);
             return id;
@@ -732,7 +744,7 @@ public class CoursesDataBase {
 
         public static CountTaskTable getInstance(SQLiteDatabase database) {
             if (instance == null) {
-                synchronized (CourseTable.class) {
+                synchronized (CountTaskTable.class) {
                     if (instance == null) {
                         instance = new CountTaskTable(database);
                     }
@@ -871,11 +883,3 @@ public class CoursesDataBase {
         private static final int NUM_COLUMN_ANSWER_VALUE = 6;
     }
 }
-
-/** TODO-LIST
- *      1) Write task creating!
- *      2) Divide to class-tables
- *      3) Write saving in DB!
- *          a) when saving course send to server and id of course send reverse
- *          b) when phone had gotten id of course he save that in own DataBase;
- */

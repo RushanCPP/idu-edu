@@ -1,4 +1,4 @@
-package com.example.solidcourse.education;
+package com.example.solidcourse.education.fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -22,12 +22,14 @@ import com.example.solidcourse.dataClasses.course.Task;
 import com.example.solidcourse.dataClasses.course.tasks.CountTask;
 import com.example.solidcourse.dataClasses.course.tasks.StudyTask;
 import com.example.solidcourse.databinding.FragmentEducationLessonBinding;
+import com.example.solidcourse.education.EducationViewModel;
 
 import java.util.List;
 import java.util.Locale;
 
 public class EducationLessonFragment extends Fragment {
     FragmentEducationLessonBinding binding;
+    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class EducationLessonFragment extends Fragment {
         assert getContext() != null;
         TasksAdapter adapter = new TasksAdapter(getContext(), R.layout.fragment_course_list_view_item, lesson.getTasks());
         binding = FragmentEducationLessonBinding.inflate(inflater, container, false);
+        binding.educationLessonName.setText("Название: " + lesson.getName());
         binding.tasksToEducation.setOnItemClickListener((adapterView, view, index, lastParam) -> {
             Task taskToSend = lesson.get(index);
             viewModel.setTask(taskToSend);

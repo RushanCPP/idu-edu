@@ -95,6 +95,8 @@ public class Lesson implements Serializable {
         return "Lesson{" +
                 "name='" + name + '\'' +
                 ", tasks=" + tasks +
+                ", id=" + id +
+                ", paragraphId=" + paragraphId +
                 '}';
     }
 }

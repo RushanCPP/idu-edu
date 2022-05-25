@@ -1,4 +1,4 @@
-package com.example.solidcourse.education;
+package com.example.solidcourse.education.fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -20,12 +20,14 @@ import com.example.solidcourse.R;
 import com.example.solidcourse.dataClasses.course.Lesson;
 import com.example.solidcourse.dataClasses.course.Paragraph;
 import com.example.solidcourse.databinding.FragmentEducationParagraphBinding;
+import com.example.solidcourse.education.EducationViewModel;
 
 import java.util.List;
 import java.util.Locale;
 
 public class EducationParagraphFragment extends Fragment {
     FragmentEducationParagraphBinding binding;
+    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -34,7 +36,7 @@ public class EducationParagraphFragment extends Fragment {
         assert getContext() != null;
         LessonListViewAdapter adapter = new LessonListViewAdapter(getContext(), R.layout.fragment_course_list_view_item, paragraph.getLessons());
         binding = FragmentEducationParagraphBinding.inflate(inflater, container, false);
-        binding.educationParagraphName.setText(paragraph.getName());
+        binding.educationParagraphName.setText("Название: " + paragraph.getName());
         binding.lessonsToEducation.setAdapter(adapter);
         binding.lessonsToEducation.setOnItemClickListener((adapterView, view, index, lastParam) -> {
             viewModel.setLesson(paragraph.get(index));

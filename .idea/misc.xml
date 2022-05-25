@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/rusha/AndroidStudioProjects/SolidCourse/app/src/main/res/drawable/ic_menu_camera.xml" value="0.104" />
+        <entry key="..\:/Users/rusha/AndroidStudioProjects/SolidCourse/app/src/main/res/drawable/ic_menu_gallery.xml" value="0.104" />
+        <entry key="..\:/Users/rusha/AndroidStudioProjects/SolidCourse/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.104" />
+        <entry key="..\:/Users/rusha/AndroidStudioProjects/SolidCourse/app/src/main/res/drawable/side_nav_bar.xml" value="0.104" />
+        <entry key="..\:/Users/rusha/AndroidStudioProjects/SolidCourse/app/src/main/res/drawable/splash.xml" value="0.104" />
         <entry key="..\:/Users/rusha/AndroidStudioProjects/SolidCourse/app/src/main/res/layout/activity_courses_catalog.xml" value="0.22760416666666666" />
         <entry key="..\:/Users/rusha/AndroidStudioProjects/SolidCourse/app/src/main/res/layout/activity_education.xml" value="0.10260416666666666" />
         <entry key="..\:/Users/rusha/AndroidStudioProjects/SolidCourse/app/src/main/res/layout/activity_main.xml" value="0.18333333333333332" />
@@ -27,7 +32,7 @@
         <entry key="..\:/Users/rusha/AndroidStudioProjects/SolidCourse/app/src/main/res/layout/fragment_education_study_task.xml" value="0.22760416666666666" />
         <entry key="..\:/Users/rusha/AndroidStudioProjects/SolidCourse/app/src/main/res/layout/fragment_lesson.xml" value="0.33" />
         <entry key="..\:/Users/rusha/AndroidStudioProjects/SolidCourse/app/src/main/res/layout/fragment_lesson_creating.xml" value="0.22" />
-        <entry key="..\:/Users/rusha/AndroidStudioProjects/SolidCourse/app/src/main/res/layout/fragment_lesson_editing.xml" value="0.10416666666666667" />
+        <entry key="..\:/Users/rusha/AndroidStudioProjects/SolidCourse/app/src/main/res/layout/fragment_lesson_editing.xml" value="0.18" />
         <entry key="..\:/Users/rusha/AndroidStudioProjects/SolidCourse/app/src/main/res/layout/fragment_paragraph.xml" value="0.25" />
         <entry key="..\:/Users/rusha/AndroidStudioProjects/SolidCourse/app/src/main/res/layout/fragment_paragraph_creating.xml" value="0.2" />
         <entry key="..\:/Users/rusha/AndroidStudioProjects/SolidCourse/app/src/main/res/layout/fragment_paragraph_editing.xml" value="0.25" />

@@ -16,9 +16,10 @@ import com.example.solidcourse.dataClasses.course.tasks.StudyTask;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("ALL")
 public class FavouritesCoursesDataBase {
     private static final String DATA_BASE_NAME = "favourite_courses.db";
-    private static final int DATA_BASE_VERSION = 2;
+    private static final int DATA_BASE_VERSION = 10;
     CourseTable courseTable;
     ParagraphTable paragraphTable;
     LessonTable lessonTable;
@@ -95,13 +96,12 @@ public class FavouritesCoursesDataBase {
     }
 
     public long insertCourse(Course course) {
-
-        long id = courseTable.insert(course);
+        courseTable.insert(course);
         for (Paragraph paragraph : course.getParagraphs()) {
             paragraph.setCourseId(course.getId());
             insertParagraph(paragraph);
         }
-        return id;
+        return course.getId();
     }
 
     public Paragraph selectParagraph(long id) {
@@ -296,10 +296,9 @@ public class FavouritesCoursesDataBase {
             ContentValues contentValues = new ContentValues();
             contentValues.put(COLUMN_NAME, course.getName());
             contentValues.put(COLUMN_AUTHOR, course.getAuthor());
-            // TODO WRITE SENDING TO DB, and get id!
-            long id = database.insert(TABLE_NAME, null, contentValues);
-            course.setId(id);
-            return id;
+            contentValues.put(COLUMN_ID, course.getId());
+            database.insert(TABLE_NAME, null, contentValues);
+            return course.getId();
         }
 
         public Course select(long id) {
@@ -408,7 +407,6 @@ public class FavouritesCoursesDataBase {
             ContentValues contentValues = new ContentValues();
             contentValues.put(COLUMN_COURSE_ID, paragraph.getCourseId());
             contentValues.put(COLUMN_NAME, paragraph.getName());
-            // TODO WRITE SENDING TO DB, and get id!
             long id = database.insert(TABLE_NAME, null, contentValues);
             paragraph.setId(id);
             return id;
@@ -521,7 +519,6 @@ public class FavouritesCoursesDataBase {
             ContentValues contentValues = new ContentValues();
             contentValues.put(COLUMN_PARAGRAPH_ID, lesson.getParagraphId());
             contentValues.put(COLUMN_NAME, lesson.getName());
-            // TODO WRITE SENDING TO DB, and get id!
             long id = database.insert(TABLE_NAME, null, contentValues);
             lesson.setId(id);
             return id;
@@ -642,7 +639,6 @@ public class FavouritesCoursesDataBase {
             contentValues.put(COLUMN_SCORE, studyTask.getScore());
             contentValues.put(COLUMN_STATE, studyTask.getState());
 
-            // TODO WRITE SENDING TO DB, and get id!
             long id = database.insert(TABLE_NAME, null, contentValues);
             studyTask.setId(id);
             return id;

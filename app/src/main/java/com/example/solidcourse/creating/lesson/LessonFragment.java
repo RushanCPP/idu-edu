@@ -104,8 +104,7 @@ public class LessonFragment extends Fragment {
                 courseViewModel.setTask(task);
                 NavHostFragment.findNavController(this).navigate(R.id.action_lessonFragment_to_studyTaskEditingFragment);
             } else {
-                Toast.makeText(getContext(), "WTF!" + task, Toast.LENGTH_SHORT).show();
-                // throw new RuntimeException("Hello!");
+                return false;
             }
         } else if (id == ID_DELETE) {
             lesson.remove(positionOfLongClick);

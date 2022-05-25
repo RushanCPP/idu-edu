@@ -95,6 +95,8 @@ public class Paragraph implements Serializable {
         return "Paragraph{" +
                 "name='" + name + '\'' +
                 ", lessons=" + lessons +
+                ", id=" + id +
+                ", courseId=" + courseId +
                 '}';
     }
 }

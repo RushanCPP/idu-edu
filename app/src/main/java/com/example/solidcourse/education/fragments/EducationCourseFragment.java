@@ -1,4 +1,4 @@
-package com.example.solidcourse.education;
+package com.example.solidcourse.education.fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -20,6 +20,7 @@ import com.example.solidcourse.R;
 import com.example.solidcourse.dataClasses.course.Course;
 import com.example.solidcourse.dataClasses.course.Paragraph;
 import com.example.solidcourse.databinding.FragmentEducationCourseBinding;
+import com.example.solidcourse.education.EducationViewModel;
 
 import java.util.List;
 import java.util.Locale;

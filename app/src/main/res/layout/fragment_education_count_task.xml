@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".education.EducationCountTaskFragment">
+    tools:context=".education.fragments.EducationCountTaskFragment">
 
     <TextView
         android:id="@+id/label_task_text"
@@ -40,4 +40,13 @@
         android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@+id/answer_input"
         tools:layout_editor_absoluteX="0dp" />
+
+    <Button
+        android:id="@+id/restart_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/try_again"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/accepted_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>

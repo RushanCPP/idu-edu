@@ -1,5 +1,6 @@
 package com.example.solidcourse.creating.task;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.example.solidcourse.databinding.FragmentStudyTaskEditingBinding;
 
 public class StudyTaskEditingFragment extends Fragment {
     FragmentStudyTaskEditingBinding binding;
+    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -24,7 +26,7 @@ public class StudyTaskEditingFragment extends Fragment {
         CourseViewModel courseViewModel = new ViewModelProvider(requireActivity()).get(CourseViewModel.class);
         StudyTask studyTask = (StudyTask) courseViewModel.getTask();
         binding.studyTaskEditingText.setText(studyTask.getText());
-        binding.studyTaskEditingScore.setText(studyTask.getMaxScore());
+        binding.studyTaskEditingScore.setText("" + studyTask.getMaxScore());
         binding.studyTaskEditingButton.setOnClickListener(view -> {
             String score = binding.studyTaskEditingScore.getText().toString(),
                     text = binding.studyTaskEditingText.getText().toString();

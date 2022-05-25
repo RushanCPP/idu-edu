@@ -13,7 +13,7 @@
         android:theme="@style/Theme.SolidCourse">
         <activity
             android:name=".education.EducationActivity"
-            android:exported="false" />
+            android:exported="false"/>
         <activity
             android:name=".catalog.CoursesCatalog"
             android:exported="false" />
@@ -21,13 +21,13 @@
             android:name=".creating.CreatingActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
         </activity>
     </application>
 

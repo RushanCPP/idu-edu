@@ -6,7 +6,7 @@
     app:startDestination="@id/educationCoursesFragment">
     <fragment
         android:id="@+id/educationCoursesFragment"
-        android:name="com.example.solidcourse.education.EducationCoursesFragment"
+        android:name="com.example.solidcourse.education.fragments.EducationCoursesFragment"
         android:label="fragment_education_courses"
         tools:layout="@layout/fragment_education_courses" >
         <action
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/educationParagraphFragment"
-        android:name="com.example.solidcourse.education.EducationParagraphFragment"
+        android:name="com.example.solidcourse.education.fragments.EducationParagraphFragment"
         android:label="fragment_education_paragraph"
         tools:layout="@layout/fragment_education_paragraph" >
         <action
@@ -24,7 +24,7 @@
     </fragment>
     <fragment
         android:id="@+id/educationCourseFragment"
-        android:name="com.example.solidcourse.education.EducationCourseFragment"
+        android:name="com.example.solidcourse.education.fragments.EducationCourseFragment"
         android:label="fragment_education_course"
         tools:layout="@layout/fragment_education_course" >
         <action
@@ -33,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/educationLessonFragment"
-        android:name="com.example.solidcourse.education.EducationLessonFragment"
+        android:name="com.example.solidcourse.education.fragments.EducationLessonFragment"
         android:label="fragment_education_lesson"
         tools:layout="@layout/fragment_education_lesson" >
         <action
@@ -45,12 +45,12 @@
     </fragment>
     <fragment
         android:id="@+id/educationStudyTaskFragment"
-        android:name="com.example.solidcourse.education.EducationStudyTaskFragment"
+        android:name="com.example.solidcourse.education.fragments.EducationStudyTaskFragment"
         android:label="fragment_education_study_task"
         tools:layout="@layout/fragment_education_study_task" />
     <fragment
         android:id="@+id/educationCountTaskFragment"
-        android:name="com.example.solidcourse.education.EducationCountTaskFragment"
+        android:name="com.example.solidcourse.education.fragments.EducationCountTaskFragment"
         android:label="fragment_education_count_task"
         tools:layout="@layout/fragment_education_count_task" />
 </navigation>

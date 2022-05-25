@@ -25,7 +25,7 @@ import com.example.solidcourse.dataClasses.course.Course;
 import com.example.solidcourse.dataClasses.course.Paragraph;
 import com.example.solidcourse.dataClasses.server.SocketAdapter;
 import com.example.solidcourse.databinding.FragmentCourseBinding;
-import com.example.solidcourse.creating.MyCoursesDataBase;
+import com.example.solidcourse.database.MyCoursesDataBase;
 
 import java.net.Socket;
 import java.util.List;
@@ -89,16 +89,16 @@ public class CourseFragment extends Fragment {
                     assert getActivity() != null;
                     if (courseViewModel.getCreateValue()) {
                         socketAdapter.writeLine("INSERT");
-                        getActivity().runOnUiThread(() -> Toast.makeText(getContext(), "Write object!", Toast.LENGTH_SHORT).show());
                         socketAdapter.writeObject(course);
                         long id = socketAdapter.readLong();
                         course.setId(id);
+                        myCoursesDataBase.insertCourse(course);
                     } else {
                         socketAdapter.writeLine("UPDATE");
                         socketAdapter.writeObject(course);
                         myCoursesDataBase.updateCourse(course);
                     }
-                    getActivity().runOnUiThread(() -> Toast.makeText(getContext(), "Save completed!", Toast.LENGTH_SHORT).show());
+                    getActivity().runOnUiThread(() -> Toast.makeText(getContext(), "Сохранено!", Toast.LENGTH_SHORT).show());
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
@@ -121,7 +121,8 @@ public class CourseFragment extends Fragment {
         int id = item.getItemId();
         if (id == ID_EDIT) {
             courseViewModel.setParagraphValue(course.get(positionLongItemClick));
-            NavHostFragment.findNavController(this).navigate(R.id.action_courseFragment_to_paragraphEditingFragment);
+            NavHostFragment.findNavController(this)
+                    .navigate(R.id.action_courseFragment_to_paragraphEditingFragment);
         } else if (id == ID_DELETE) {
             course.remove(positionLongItemClick);
             adapter.notifyDataSetChanged();

@@ -27,6 +27,8 @@ public class StudyTask extends AbstractTask implements Serializable {
                 ", text='" + text + '\'' +
                 ", score=" + score +
                 ", maxScore=" + maxScore +
+                ", id=" + id +
+                ", lessonId=" + lessonId +
                 '}';
     }
 }

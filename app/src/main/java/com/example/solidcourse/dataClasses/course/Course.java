@@ -88,7 +88,8 @@ public class Course implements Serializable {
     @Override
     public String toString() {
         return "Course{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", author='" + author + '\'' +
                 ", paragraphs=" + paragraphs +
                 '}';
@@ -101,4 +102,6 @@ public class Course implements Serializable {
     public void setId(long id) {
         this.id = id;
     }
+
+
 }

@@ -1,4 +1,4 @@
-package com.example.solidcourse.education;
+package com.example.solidcourse.education.fragments;
 
 import android.os.Bundle;
 
@@ -11,10 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.solidcourse.R;
 import com.example.solidcourse.dataClasses.course.Task;
-import com.example.solidcourse.dataClasses.course.tasks.CountTask;
 import com.example.solidcourse.databinding.FragmentEducationStudyTaskBinding;
+import com.example.solidcourse.education.EducationViewModel;
 
 public class EducationStudyTaskFragment extends Fragment {
     FragmentEducationStudyTaskBinding binding;
@@ -26,10 +25,10 @@ public class EducationStudyTaskFragment extends Fragment {
         binding = FragmentEducationStudyTaskBinding.inflate(inflater, container, false);
         binding.educationTaskText.setText(task.getText());
         binding.acceptedButton.setOnClickListener(view -> {
-            // StudyTask сам знает, как ответить
-            task.answer("");
+            task.answer("answer");
             NavHostFragment.findNavController(this).popBackStack();
         });
+        binding.restartButton.setOnClickListener(view -> task.restart());
         return binding.getRoot();
     }
 }
