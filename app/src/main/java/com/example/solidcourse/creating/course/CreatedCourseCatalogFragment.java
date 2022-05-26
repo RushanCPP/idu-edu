@@ -23,7 +23,6 @@ import android.widget.Toast;
 import com.example.solidcourse.R;
 import com.example.solidcourse.creating.CourseViewModel;
 import com.example.solidcourse.dataClasses.course.Course;
-import com.example.solidcourse.dataClasses.server.SocketAdapter;
 import com.example.solidcourse.databinding.FragmentCreatedCourseCatalogBinding;
 import com.example.solidcourse.database.MyCoursesDataBase;
 
@@ -47,7 +46,6 @@ public class CreatedCourseCatalogFragment extends Fragment {
         dataBase = new MyCoursesDataBase(getContext());
         courses = dataBase.selectAllCourses();
         assert getContext() != null;
-        Toast.makeText(getContext(), "" + courses, Toast.LENGTH_LONG).show();
         adapter = new CoursesListViewAdapter(getContext(), R.layout.fragment_course_list_view_item, courses);
         binding.availableCoursesCatalog.setAdapter(adapter);
         binding.availableCoursesCatalog.setOnItemClickListener((adapterView, view, index, lastParam) -> {
@@ -81,7 +79,7 @@ public class CreatedCourseCatalogFragment extends Fragment {
         int id = item.getItemId();
         if (id == ID_DELETE) {
             long courseId = courses.get(positionOfLongClick).getId();
-            Thread senderToServer = new Thread(() -> {
+/*            Thread senderToServer = new Thread(() -> {
                 String serverIp = "192.168.43.244";
                 try (SocketAdapter socketAdapter = new SocketAdapter(new Socket(serverIp, 8080))) {
                     socketAdapter.writeLine("DELETE");
@@ -89,11 +87,14 @@ public class CreatedCourseCatalogFragment extends Fragment {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            });
-            senderToServer.start();
-            dataBase.deleteCourse(courseId);
-            courses.remove(positionOfLongClick);
-            adapter.notifyDataSetChanged();
+            });*/
+            Runnable deleter = () -> {
+                dataBase.deleteCourse(courseId);
+                courses.remove(positionOfLongClick);
+                assert getActivity() != null;
+                getActivity().runOnUiThread(() -> adapter.notifyDataSetChanged());
+            };
+            deleter.run();
         } else {
             return false;
         }

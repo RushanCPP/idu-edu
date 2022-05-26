@@ -12,6 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.solidcourse.dataClasses.course.Task;
+import com.example.solidcourse.dataClasses.course.tasks.CountTask;
+import com.example.solidcourse.dataClasses.course.tasks.StudyTask;
+import com.example.solidcourse.database.FavouritesCoursesDataBase;
 import com.example.solidcourse.databinding.FragmentEducationStudyTaskBinding;
 import com.example.solidcourse.education.EducationViewModel;
 
@@ -26,7 +29,13 @@ public class EducationStudyTaskFragment extends Fragment {
         binding.educationTaskText.setText(task.getText());
         binding.acceptedButton.setOnClickListener(view -> {
             task.answer("answer");
-            NavHostFragment.findNavController(this).popBackStack();
+            Runnable saver = () -> {
+                FavouritesCoursesDataBase favouritesCoursesDataBase = new FavouritesCoursesDataBase(getContext());
+                favouritesCoursesDataBase.updateStudyTask((StudyTask) task);
+                assert getActivity() != null;
+                getActivity().runOnUiThread(() -> NavHostFragment.findNavController(this).popBackStack());
+            };
+            saver.run();
         });
         binding.restartButton.setOnClickListener(view -> task.restart());
         return binding.getRoot();

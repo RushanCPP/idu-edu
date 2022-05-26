@@ -23,7 +23,6 @@ import com.example.solidcourse.R;
 import com.example.solidcourse.creating.CourseViewModel;
 import com.example.solidcourse.dataClasses.course.Course;
 import com.example.solidcourse.dataClasses.course.Paragraph;
-import com.example.solidcourse.dataClasses.server.SocketAdapter;
 import com.example.solidcourse.databinding.FragmentCourseBinding;
 import com.example.solidcourse.database.MyCoursesDataBase;
 
@@ -83,6 +82,11 @@ public class CourseFragment extends Fragment {
 
         binding.courseFragmentSaveButton.setOnClickListener(view -> {
             Thread saver = new Thread(() -> {
+                MyCoursesDataBase myCoursesDataBase = new MyCoursesDataBase(getContext());
+                myCoursesDataBase.insertCourse(course);
+                assert getActivity() != null;
+                getActivity().runOnUiThread(() -> Toast.makeText(getContext(), "Сохранено!", Toast.LENGTH_SHORT).show());
+ /*
                 String serverIp = "192.168.43.244";
                 try (SocketAdapter socketAdapter = new SocketAdapter(new Socket(serverIp, 8080))) {
                     MyCoursesDataBase myCoursesDataBase = new MyCoursesDataBase(getContext());
@@ -101,7 +105,7 @@ public class CourseFragment extends Fragment {
                     getActivity().runOnUiThread(() -> Toast.makeText(getContext(), "Сохранено!", Toast.LENGTH_SHORT).show());
                 } catch (Exception exception) {
                     exception.printStackTrace();
-                }
+                }*/
             });
 
             saver.start();

@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.solidcourse.dataClasses.course.Task;
+import com.example.solidcourse.dataClasses.course.tasks.CountTask;
+import com.example.solidcourse.database.FavouritesCoursesDataBase;
 import com.example.solidcourse.databinding.FragmentEducationCountTaskBinding;
 import com.example.solidcourse.education.EducationViewModel;
 
@@ -38,7 +40,13 @@ public class EducationCountTaskFragment extends Fragment {
             task.answer(answer);
             if (task.isAccepted()) {
                 Toast.makeText(getContext(), "Правильно!", Toast.LENGTH_SHORT).show();
-                NavHostFragment.findNavController(this).popBackStack();
+                Runnable saver = () -> {
+                    FavouritesCoursesDataBase favouritesCoursesDataBase = new FavouritesCoursesDataBase(getContext());
+                    favouritesCoursesDataBase.updateCountTask((CountTask) task);
+                    assert getActivity() != null;
+                    getActivity().runOnUiThread(() -> NavHostFragment.findNavController(this).popBackStack());
+                };
+                saver.run();
             } else {
                 Toast.makeText(getContext(), "Неправильно!", Toast.LENGTH_SHORT).show();
             }

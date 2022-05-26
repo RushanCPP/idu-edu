@@ -15,9 +15,7 @@ public class EducationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_education);
         assert getSupportActionBar() != null;
-        getSupportActionBar().hide();
-        Toolbar toolbar = findViewById(R.id.main_toolbar_id);
-        toolbar.setTitle("Solid Course");
+        getSupportActionBar().hide();Toolbar toolbar = findViewById(R.id.main_toolbar_id);toolbar.setTitle("Solid Course");
         toolbar.setOnMenuItemClickListener(item -> {
             int id = item.getItemId();
             if (id == R.id.courses_catalog) {

@@ -19,7 +19,7 @@ import java.util.List;
 @SuppressWarnings("ALL")
 public class MyCoursesDataBase {
     private static final String DATA_BASE_NAME = "created_courses.db";
-    private static final int DATA_BASE_VERSION = 11;
+    private static final int DATA_BASE_VERSION = 17;
     CourseTable courseTable;
     ParagraphTable paragraphTable;
     LessonTable lessonTable;
@@ -30,6 +30,7 @@ public class MyCoursesDataBase {
         public OpenHelper(Context context) {
             super(context, DATA_BASE_NAME, null, DATA_BASE_VERSION);
         }
+
         @Override
         public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
             CourseTable.getInstance(sqLiteDatabase).dropTable();
@@ -39,6 +40,7 @@ public class MyCoursesDataBase {
             CountTaskTable.getInstance(sqLiteDatabase).dropTable();
             onCreate(sqLiteDatabase);
         }
+
         @Override
         public void onCreate(SQLiteDatabase sqLiteDatabase) {
             CourseTable.getInstance(sqLiteDatabase).createTable();
@@ -297,11 +299,9 @@ public class MyCoursesDataBase {
             ContentValues contentValues = new ContentValues();
             contentValues.put(COLUMN_NAME, course.getName());
             contentValues.put(COLUMN_AUTHOR, course.getAuthor());
-            contentValues.put(COLUMN_ID, course.getId());
-            database.insert(TABLE_NAME, null, contentValues);
+            course.setId(database.insert(TABLE_NAME, null, contentValues));
             return course.getId();
         }
-
         public Course select(long id) {
             Cursor cursor = database.query(TABLE_NAME, null,
                     COLUMN_ID + " = ?",

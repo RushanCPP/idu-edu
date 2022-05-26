@@ -16,10 +16,9 @@ import com.example.solidcourse.dataClasses.course.tasks.StudyTask;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressWarnings("ALL")
 public class FavouritesCoursesDataBase {
     private static final String DATA_BASE_NAME = "favourite_courses.db";
-    private static final int DATA_BASE_VERSION = 11;
+    private static final int DATA_BASE_VERSION = 17;
     CourseTable courseTable;
     ParagraphTable paragraphTable;
     LessonTable lessonTable;
@@ -147,8 +146,6 @@ public class FavouritesCoursesDataBase {
         return result;
     }
 
-
-    //
     public Lesson selectLesson(long id) {
         Lesson lesson = lessonTable.select(id);
         List<Task> tasks = new ArrayList<>();
@@ -297,8 +294,7 @@ public class FavouritesCoursesDataBase {
             ContentValues contentValues = new ContentValues();
             contentValues.put(COLUMN_NAME, course.getName());
             contentValues.put(COLUMN_AUTHOR, course.getAuthor());
-            contentValues.put(COLUMN_ID, course.getId());
-            database.insert(TABLE_NAME, null, contentValues);
+            course.setId(database.insert(TABLE_NAME, null, contentValues));
             return course.getId();
         }
 

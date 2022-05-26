@@ -13,14 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.solidcourse.R;
 import com.example.solidcourse.dataClasses.course.Course;
-import com.example.solidcourse.dataClasses.server.SocketAdapter;
+import com.example.solidcourse.database.MyCoursesDataBase;
 import com.example.solidcourse.databinding.FragmentCoursesCatalogBinding;
 import com.example.solidcourse.database.FavouritesCoursesDataBase;
 
-import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,23 +37,13 @@ public class CoursesCatalogFragment extends Fragment {
         binding.coursesCatalogListView.setAdapter(adapter);
         dataBase = new FavouritesCoursesDataBase(getContext());
         Thread thread = new Thread(() -> {
-            String serverIp = "192.168.43.244";
             assert getActivity() != null;
-
-            try (SocketAdapter socketAdapter = new SocketAdapter(new Socket(serverIp, 8080))) {
-                // Отправляет запрос серверу
-                socketAdapter.writeLine("COURSES");
-
-                @SuppressWarnings("unchecked")
-                List<Course> courseList = (ArrayList<Course>) socketAdapter.readObject();
-                courses.clear();
-                courses.addAll(courseList);
-
-                assert getActivity() != null;
-                getActivity().runOnUiThread(adapter::notifyDataSetChanged);
-            } catch (Exception exception) {
-                exception.printStackTrace();
-            }
+            List<Course> courseList = new MyCoursesDataBase(getContext()).selectAllCourses();
+            getActivity().runOnUiThread(() -> Toast.makeText(getContext(), courseList + "", Toast.LENGTH_LONG).show());
+            courses.clear();
+            courses.addAll(courseList);
+            assert getActivity() != null;
+            getActivity().runOnUiThread(adapter::notifyDataSetChanged);
         });
         thread.start();
         return binding.getRoot();

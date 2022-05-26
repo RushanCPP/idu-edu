@@ -7,10 +7,16 @@ import androidx.appcompat.widget.Toolbar;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.solidcourse.catalog.CoursesCatalog;
 import com.example.solidcourse.creating.CreatingActivity;
+import com.example.solidcourse.dataClasses.course.Course;
+import com.example.solidcourse.database.MyCoursesDataBase;
 import com.example.solidcourse.education.EducationActivity;
+
+import java.util.List;
 
 @SuppressLint("CustomSplashScreen")
 public class MainActivity extends AppCompatActivity {
@@ -35,6 +41,16 @@ public class MainActivity extends AppCompatActivity {
             }
             goToActivity(activityID);
             return false;
+        });
+
+        MyCoursesDataBase coursesDataBase = new MyCoursesDataBase(this);
+        Button button = findViewById(R.id.select_database);
+        button.setOnClickListener(view -> {
+            List<Course> courseList = coursesDataBase.selectAllCourses();
+            Toast.makeText(this, "" + courseList, Toast.LENGTH_LONG).show();
+            for (int i = 0; i < courseList.size(); ++i) {
+                Toast.makeText(this, "" + coursesDataBase.selectAllParagraphs(courseList.get(i).getId()), Toast.LENGTH_LONG).show();
+            }
         });
     }
 
